@@ -1,0 +1,18 @@
+For this exercise, I have 4 classes: Node, Queue, Cache and LRU_Cache.
+Cache is used to keep track of value of key in LRU_Cache and frequency of the key is in queue track.
+
+In LRU_Cache, I have variables:
+    #. cache: a dictionary to map key and its Cache object. For example: {1: {1, 2}}, 1 is key of this cache, 1 from {1:2} is value of the cache, 
+    and 2 from{1:2} is frequency of this key.
+    #. capacity: capacity of this LRU_Cache.
+    #. queue: keep track of age of items, by having a collection of key in the queue.
+
+
+When set() method is called, a new key and (value-frequency) are put into cache dictionary and the key are put into queue. If cache dictionary is full, remove the least recently used item.
+The least recently used item is the one in the queue with value of frequency is 1. So, I keep dequeue the queue until the item was dequeue has value of frequency
+is 1.  Since, the dequeue of queue and set value of dictionary has time complexity is O(1), the set() method has time complexity of O(1).
+
+When get() method is called, if the item associate with the key exist, enqueue the key and return value associate. If item does not exist, return -1.
+Since, the enqueue and get value of dictionary has time complexity is O(1), the operation has time complexity is O(1).
+
+Since, LRU_Cache has a dictionary, a queue and a integer. Space complexity is O(2*n+4), this is linear space complexity.

@@ -1,0 +1,1 @@
+For BlockChain class, with the append() method, time complexity is O(1) and space complexity is O(1)

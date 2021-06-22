@@ -1,0 +1,8 @@
+In is_user_in_group(), no new variable is used, so space complexity is linear O(1).
+About time complexity, the given group can have n sub groups level 1.
+Each sub groups level 1 can have n sub groups level 2.
+...
+Each sub groups level n-1 can have n sub groups level n.
+So time complexity is O(n*n*n*...*n) which is factorial complexity O(n!)
+
+

@@ -1,0 +1,4 @@
+In find_files() function, one list() variable and this is O(n) for space complexity.
+About time complexity, since a path can contains n subdirectories, and each subdirectories can
+further contains n subdirectories. And no limit to the depth of subdirectories. 
+So, time complexity is O(n!)
