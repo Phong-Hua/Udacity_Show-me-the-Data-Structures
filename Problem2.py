@@ -16,16 +16,72 @@ def find_files(suffix, path):
     Returns:
        a list of paths
     """
+    if suffix is None or not path:
+        return []
+
     result = list()
     all_dir = os.listdir(path);
 
     for dir in all_dir:
         dir_path = os.path.join(path, dir);
+        
         if os.path.isfile(dir_path) and dir.endswith(suffix):
             result.append(dir_path)
+
         elif os.path.isdir(dir_path):
             files_in_sub_dir = find_files(suffix, dir_path)
             if files_in_sub_dir != []:
-                result.append(files_in_sub_dir)
+                result += files_in_sub_dir
         
     return result
+
+def test_case_1():
+    """
+    Find a list of files that has .c suffix at the testdir
+    """
+    print("*********Test_case_1***********")
+    path = os.path.join(os.path.dirname(__file__), 'testdir')
+    result = find_files('.c', path)
+    for file in result:
+        print(file)
+
+def test_case_2():
+    """
+    Testing edge case, with suffix is None, should return an empty list
+    """
+    print("*********Test_case_2***********")
+    path = os.path.join(os.path.dirname(__file__), 'testdir')
+    result = find_files(None, path)
+    print(result)
+
+def test_case_3():
+    """
+    Testing edge case, with path is None, should return an empty list
+    """
+    print("*********Test_case_3***********")
+    result = find_files('.c', None)
+    print(result)
+
+def test_case_4():
+    """
+    Testing edge case, with suffix is an empty string, should return all files in testdir
+    """
+    print("*********Test_case_4***********")
+    path = os.path.join(os.path.dirname(__file__), 'testdir')
+    result = find_files('', path)
+    for file in result:
+        print(file)
+
+def test_case_5():
+    """
+    Testing edge case, with path is an empty string, should return an empty list
+    """
+    print("*********Test_case_5***********")
+    result = find_files('.c', "")
+    print(result)
+
+test_case_1()
+test_case_2()
+test_case_3()
+test_case_4()
+test_case_5()

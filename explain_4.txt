@@ -1,8 +1,8 @@
-In is_user_in_group(), no new variable is used, so space complexity is linear O(1).
-About time complexity, the given group can have n sub groups level 1.
-Each sub groups level 1 can have n sub groups level 2.
-...
-Each sub groups level n-1 can have n sub groups level n.
-So time complexity is O(n*n*n*...*n) which is factorial complexity O(n!)
+The structure of group is similar to a tree, which each user is consider a leaf, each sub group is consider a branch.
+The depth of this tree is k, and each node has m child nodes. Number of nodes in this tree is k^m.
+To find a user is in the group is similar to find a leaf with specific value in a tree, this would search entire tree.
+The time complexity to find a user in a group is O(k^m). Assume total number of nodes in this tree is n. 
+Then time complexity is O(n). This is linear complexity.
 
-
+For space complexity, at a group, it get all users and sub_groups of that group, which is equal to number of node of that branch.
+Hence, the space complexity will be equal to number of nodes in this tree k^m, or O(n), which is linear complexity.

@@ -1,1 +1,2 @@
-For BlockChain class, with the append() method, time complexity is O(1) and space complexity is O(1)
+For BlockChain class, with the append() method, time complexity is O(1). The blockchain contains a linkedlist of Block and each block has space complexity is O(1),
+so space complexity for BlockChain class is O(n)

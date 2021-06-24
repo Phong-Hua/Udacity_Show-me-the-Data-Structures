@@ -5,6 +5,7 @@ Code from https://www.geeksforgeeks.org/binary-heap/
 # A Python program to demonstrate common binary heap operations
   
 # Import the heap functions from python library
+from Problem2 import test_case_3
 from heapq import heappush, heappop, heapify
   
 # heappop - pop and return the smallest element from heap
@@ -63,37 +64,6 @@ class MinHeap:
             return self.heap[i]
         return None
   
-# Driver pgoratm to test above function
-# heapObj = MinHeap()
-
-# heapObj.insert_key(3, 'B')
-# heapObj.insert_key(2, 'D')
-
-# heapObj.delete_key(1)
-
-# heapObj.insert_key(6, 'E')
-# heapObj.insert_key(7, 'A')
-# heapObj.insert_key(7, 'C')
-# heapObj.insert_key(1, 'F')
-
-# print("Print all")
-# heapObj.print_all()
-
-# print("Extract min")
-# print(heapObj.extract_min())
-
-# print("Extract min")
-# print(heapObj.extract_min())
-
-# print("Extract min")
-# print(heapObj.extract_min())
-
-# print("Extract min")
-# print(heapObj.extract_min())
-# print(f"value at index 2 {heapObj.get_value(2)}")
-# heapObj.decrease_key(2, 1)
-# print(f"value at index 2 {heapObj.get_value(2)}")
-# print(heapObj.get_min())
 
 """
 Node implementation
@@ -180,6 +150,8 @@ def build_tree(priority_queue):
     """
     From a priority_queue build a tree and return root node
     """
+    if priority_queue.get_size() == 0:
+        return None
     while priority_queue.get_size() > 1:
         left = priority_queue.extract_min()
         right = priority_queue.extract_min()
@@ -192,12 +164,16 @@ def build_tree(priority_queue):
     return root
 
 def huffman_encoding(data):
+    if not data:
+        print("No data to encoded")
+        return None, None
 
     def traverse(root):
-        
         """
         Traverse the tree and return a dictionary of huffman code of all characters
         """
+        if not root:
+            return dict()
 
         def extract_huffman_node(huffman_node):
             """
@@ -256,7 +232,7 @@ def huffman_encoding(data):
     
 
 def huffman_decoding(data,tree):
-    if data == '' or not tree:
+    if not data or not tree:
         return ""
 
     decoded_data = ""
@@ -279,9 +255,11 @@ def huffman_decoding(data,tree):
 
 import sys
 
-if __name__ == "__main__":
-    codes = {}
-
+def test_case_1():
+    """
+    Test the normal case
+    """
+    print("*********Test_case_1**********")
     a_great_sentence = "The world is big"
 
     print ("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence)))
@@ -289,7 +267,30 @@ if __name__ == "__main__":
 
     encoded_data, tree = huffman_encoding(a_great_sentence)
 
-    print ("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
+    if encoded_data:
+        print ("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
+    print ("The content of the encoded data is: {}\n".format(encoded_data))
+
+    decoded_data = huffman_decoding(encoded_data, tree)
+
+    print ("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
+    print ("The content of the encoded data is: {}\n".format(decoded_data))
+
+def test_case_2():
+    """
+    Test the edge case, which data is an empty string, 
+    """
+    print("*********Test_case_2**********")
+    data = ""
+
+    
+    print ("The size of the data is: {}\n".format(sys.getsizeof(data)))
+    print ("The content of the data is: {}\n".format(data))
+
+    encoded_data, tree = huffman_encoding(data)
+
+    if encoded_data:
+        print ("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
     print ("The content of the encoded data is: {}\n".format(encoded_data))
 
     decoded_data = huffman_decoding(encoded_data, tree)
@@ -298,3 +299,28 @@ if __name__ == "__main__":
     print ("The content of the encoded data is: {}\n".format(decoded_data))
 
 
+def test_case_3():
+    """
+    Test the edge case, which data is an string of a single character 'TTTTTTTTTTTTT', 
+    """
+    print("*********Test_case_3**********")
+    data = "TTTTTTTTTTTTT"
+
+    
+    print ("The size of the data is: {}\n".format(sys.getsizeof(data)))
+    print ("The content of the data is: {}\n".format(data))
+
+    encoded_data, tree = huffman_encoding(data)
+
+    if encoded_data:
+        print ("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
+    print ("The content of the encoded data is: {}\n".format(encoded_data))
+
+    decoded_data = huffman_decoding(encoded_data, tree)
+
+    print ("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
+    print ("The content of the encoded data is: {}\n".format(decoded_data))
+
+test_case_1()
+test_case_2()
+test_case_3()

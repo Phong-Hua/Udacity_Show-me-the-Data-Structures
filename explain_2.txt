@@ -1,4 +1,7 @@
-In find_files() function, one list() variable and this is O(n) for space complexity.
-About time complexity, since a path can contains n subdirectories, and each subdirectories can
-further contains n subdirectories. And no limit to the depth of subdirectories. 
-So, time complexity is O(n!)
+This problem is similar to finding leafs with certain value of a tree, which path is the root of the tree, a file is a leaf node, and sub-directory is a branch node.
+Assume the depth of this tree is k and each node has m child nodes which include files and sub-directories of a directory.
+We have total number of files and directories in a given path is k^m or n. And find all files beneath path with file name suffix would require searching entire tree.
+This operation has time complexity of O(k^m) or O(n). This is linear time complexity.
+
+About space complexity, there is one list that hold total number of files beneath a given path. For worst case scenario,
+the size of the list could be equal to number of k^m, which is n. Hence, this is O(n) space complexity.

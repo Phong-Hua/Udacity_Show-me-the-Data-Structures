@@ -83,60 +83,134 @@ def union(llist_1, llist_2):
     
 
 def intersection(llist_1, llist_2):
-    # Your Solution Here
-    intersection_list = list() # to keep track of the order
+    intersection_list = LinkedList()
+    
+    def create_set(llist):
+        """
+        Create a set of unique element from llist
+        """
+        result = set()
+        node = llist.head
+        while node:
+            result.add(node.value)
+            node = node.next
+        return result
 
-    def traverse(node, another_list):
+    def traverse(node, another_set):
+        """
+        Recursively checking if a node is in another_set, if it is add to intersection_list.
+        """
         if node:
-            if another_list.contains(node.value):
+            if node.value in another_set:
                 intersection_list.append(node.value)
             node = node.next
-            traverse(node, another_list)
+            traverse(node, another_set)
     
-    traverse(llist_1.head, llist_2)
-    traverse(llist_2.head, llist_1)
-    result = LinkedList()
-    for element in intersection_list:
-        result.append(element)
+    set_1 = create_set(llist_1)
+    set_2 = create_set(llist_2)
 
-    return result
+    traverse(llist_1.head, set_2)
+    traverse(llist_2.head, set_1)
+    
+    return intersection_list
 
 # Test case 1
+def test_case_1():
+    """
+    Normal test case
+    """
+    print("**************Test_case_1*****************")
+    linked_list_1 = LinkedList()
+    linked_list_2 = LinkedList()
 
-linked_list_1 = LinkedList()
-linked_list_2 = LinkedList()
+    element_1 = [3,2,4,35,6,65,6,4,3,21]
+    element_2 = [6,32,4,9,6,1,11,21,1]
 
-element_1 = [3,2,4,35,6,65,6,4,3,21]
-element_2 = [6,32,4,9,6,1,11,21,1]
+    for i in element_1:
+        linked_list_1.append(i)
 
-for i in element_1:
-    linked_list_1.append(i)
+    for i in element_2:
+        linked_list_2.append(i)
 
-for i in element_2:
-    linked_list_2.append(i)
+    print(f"llist1: {linked_list_1}")
+    print(f"llist2: {linked_list_2}")
 
-print(f"llist1: {linked_list_1}")
-print(f"llist2: {linked_list_2}")
-
-print (union(linked_list_1,linked_list_2))
-print (intersection(linked_list_1,linked_list_2))
+    print (f"union result: {union(linked_list_1,linked_list_2)}")
+    print (f"intersection result: {intersection(linked_list_1,linked_list_2)}")
 
 # Test case 2
+def test_case_2():
+    """
+    Normal test case
+    """
+    print("**************Test_case_2*****************")
+    linked_list_1 = LinkedList()
+    linked_list_2 = LinkedList()
 
-linked_list_3 = LinkedList()
-linked_list_4 = LinkedList()
+    element_1 = [3,2,4,35,6,65,6,4,3,23]
+    element_2 = [1,7,8,9,11,21,1]
 
-element_1 = [3,2,4,35,6,65,6,4,3,23]
-element_2 = [1,7,8,9,11,21,1]
+    for i in element_1:
+        linked_list_1.append(i)
 
-for i in element_1:
-    linked_list_3.append(i)
+    for i in element_2:
+        linked_list_2.append(i)
 
-for i in element_2:
-    linked_list_4.append(i)
+    print(f"llist1: {linked_list_1}")
+    print(f"llist2: {linked_list_2}")
 
-print(f"llist3: {linked_list_3}")
-print(f"llist4: {linked_list_4}")
+    print (f"union result: {union(linked_list_1,linked_list_2)}")
+    print (f"intersection result: {intersection(linked_list_1,linked_list_2)}")
 
-print (union(linked_list_3,linked_list_4))
-print (intersection(linked_list_3,linked_list_4))
+# Test case 3
+def test_case_3():
+    """
+    Edge test case. list1 is empty
+    """
+    print("**************Test_case_3*****************")
+    linked_list_1 = LinkedList()
+    linked_list_2 = LinkedList()
+
+    element_1 = []
+    element_2 = [1,7,8,9,11,21,1]
+
+    for i in element_1:
+        linked_list_1.append(i)
+
+    for i in element_2:
+        linked_list_2.append(i)
+
+    print(f"llist1: {linked_list_1}")
+    print(f"llist2: {linked_list_2}")
+
+    print (f"union result: {union(linked_list_1,linked_list_2)}")
+    print (f"intersection result: {intersection(linked_list_1,linked_list_2)}")
+
+# Test case 4
+def test_case_4():
+    """
+    Edge test case. both lists are empty
+    """
+    print("**************Test_case_4*****************")
+    linked_list_1 = LinkedList()
+    linked_list_2 = LinkedList()
+
+    element_1 = []
+    element_2 = []
+
+    for i in element_1:
+        linked_list_1.append(i)
+
+    for i in element_2:
+        linked_list_2.append(i)
+
+    print(f"llist1: {linked_list_1}")
+    print(f"llist2: {linked_list_2}")
+
+    print (f"union result: {union(linked_list_1,linked_list_2)}")
+    print (f"intersection result: {intersection(linked_list_1,linked_list_2)}")
+
+test_case_1()
+test_case_2()
+test_case_3()
+test_case_4()

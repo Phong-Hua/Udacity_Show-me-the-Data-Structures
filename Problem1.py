@@ -106,9 +106,12 @@ class LRU_Cache(object):
     def __init__(self, capacity=5):
         # Initialize class variables
         self.cache = {} # cache will map key and (value, count)
-        self.capacity = capacity
+        self.capacity = capacity if capacity > 0 else 5
         # we use Queue to keep track of item recently use
         self.tracker = Queue()
+
+    def get_capacity(self):
+        return self.capacity;
 
     def get(self, key):
         # Retrieve item from provided key. Return -1 if nonexistent.
@@ -236,6 +239,99 @@ def test_case_3():
     print(our_cache.get(6)) 
     # return 6
 
+
+def test_case_4():
+    """
+    Testing edge case: Getting the same value over and over again to see if the program works
+    """
+    print("**********Test_case_4**********")
+    our_cache = LRU_Cache()
+    our_cache.set(1, 1);
+    our_cache.set(2, 2);
+    our_cache.set(3, 3);
+    our_cache.set(4, 4);
+    our_cache.set(5, 5);
+
+    print(our_cache.get(1)) 
+    # returns 1
+    print(our_cache.get(1)) 
+    # returns 1
+    print(our_cache.get(1)) 
+    # returns 1
+    print(our_cache.get(1)) 
+    # returns 1
+    print(our_cache.get(1)) 
+    # returns 1
+
+
+def test_case_5():
+    """
+    Testing edge case: Capacity is negative value
+    """
+    print("**********Test_case_5**********")
+    our_cache = LRU_Cache(-5)
+    our_cache.set(1, 1);
+    our_cache.set(2, 2);
+    our_cache.set(3, 3);
+    our_cache.set(4, 4);
+    our_cache.set(5, 5);
+
+    print(our_cache.get(1)) 
+    # returns 1
+    print(our_cache.get(2)) 
+    # returns 2
+    print(our_cache.get(3)) 
+    # returns 3
+    print(our_cache.get(4)) 
+    # returns 4
+    print(our_cache.get(5)) 
+    # returns 5
+
+
+def test_case_6():
+    """
+    Testing edge case: Getting invalid value only
+    """
+    print("**********Test_case_6**********")
+    our_cache = LRU_Cache()
+    our_cache.set(1, 1);
+    our_cache.set(2, 2);
+    our_cache.set(3, 3);
+    our_cache.set(4, 4);
+    our_cache.set(5, 5);
+
+    print(our_cache.get(6)) 
+    # returns -1
+    print(our_cache.get(7)) 
+    # returns -1
+    print(our_cache.get(8)) 
+    # returns -1
+    print(our_cache.get(9)) 
+    # returns -1
+    print(our_cache.get(10)) 
+    # returns -1
+
+
+def test_case_7():
+    """
+    Testing edge case: Input is None
+    """
+    print("**********Test_case_7**********")
+    our_cache = LRU_Cache(-5)
+    our_cache.set(1, 1);
+    our_cache.set(2, 2);
+    our_cache.set(3, 3);
+    our_cache.set(4, 4);
+    our_cache.set(5, 5);
+
+    print(our_cache.get(None)) 
+    # returns -1
+    
+
 test_case_1()
 test_case_2()
 test_case_3()
+test_case_4()
+test_case_5()
+test_case_6()
+test_case_7()

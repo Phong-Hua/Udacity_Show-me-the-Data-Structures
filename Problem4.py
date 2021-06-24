@@ -36,24 +36,75 @@ def is_user_in_group(user, group):
       user(str): user name/id
       group(class:Group): group to check user membership against
     """
-    for group_user in group.get_users():
+    if not user:
+        return False
+
+    users = group.get_users()
+    for group_user in users:
         if group_user == user:
             return True;
     
-    for sub_group in group.get_groups():
+    sub_groups = group.get_groups()
+    for sub_group in sub_groups:
         if is_user_in_group(user, sub_group):
             return True
     
     return False;
 
-parent = Group("parent")
-child = Group("child")
-sub_child = Group("subchild")
 
-sub_child_user = "sub_child_user"
-sub_child.add_user(sub_child_user)
+def test_case_1():
+    """
+    Normal test case. User is in the group
+    """
+    print("************Test_case_1****************")
+    parent = Group("parent")
+    child = Group("child")
+    sub_child = Group("subchild")
 
-child.add_group(sub_child)
-parent.add_group(child)
+    sub_child_user = "sub_child_user"
+    sub_child.add_user(sub_child_user)
 
+    child.add_group(sub_child)
+    parent.add_group(child)
 
+    print(is_user_in_group(sub_child_user, parent))
+    # True
+
+def test_case_2():
+    """
+    Normal test case. User is not in the group
+    """
+    print("************Test_case_2****************")
+    parent = Group("parent")
+    child = Group("child")
+    sub_child = Group("subchild")
+
+    sub_child_user = "sub_child_user"
+
+    child.add_group(sub_child)
+    parent.add_group(child)
+
+    print(is_user_in_group(sub_child_user, parent))
+    # False
+
+def test_case_3():
+    """
+    Edge test case. User is None
+    """
+    print("************Test_case_3****************")
+    parent = Group("parent")
+    child = Group("child")
+    sub_child = Group("subchild")
+
+    sub_child_user = None
+    sub_child.add_user(sub_child_user)
+
+    child.add_group(sub_child)
+    parent.add_group(child)
+
+    print(is_user_in_group(sub_child_user, parent))
+    # False
+
+test_case_1()
+test_case_2()
+test_case_3()

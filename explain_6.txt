@@ -2,6 +2,12 @@ In union() method, there is a recursive function append_lists(node), and loop th
 Assume input size is n which is total number of elements of llist_1 and llist_2, the time complexity of this method is O(n).
 Since, only one variable of data type LinkedList(), the space complexity of this operation is O(n)
 
-In intersection() method, there is a recursive function traverse(node, another_list) loop through all elements of one list, and check if another contains that element.
-This traverse() operation has time complexity of O(n1*n2). Since for big input size n1 = n2, This intersection() has time complexity of O(n^2).
-Since, two variable of list() and LinkedList() data type, space complexity of this operation is O(2*n) which is linear complexity.
+In intersection() function, there are two inner functions:
+    create_set(): has time complexity of O(n)
+    traverse(): loop through all elements in a list and compare with a set that has unique element from another list, since checking
+    an element in a set has time complexity of O(1), time complexity of whole operation is O(n)
+
+The time complexity of this function is (O(len(llist_1)) + O(len(llist_2))) * 2. Assume total number of llist_1 and llist_2 is
+n, then time complexity is O(n)*2, which is O(n).
+With space complexity, set_1 has space complexity of O(len(llist_1)), set_2 has space complexity of O(len(llist_2)), intersection_list has space 
+complexity of O(len(llist_1) + len(llist_2)). Hence, O(n)*2, which is O(n)
