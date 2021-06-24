@@ -23,7 +23,10 @@ The huffman_encoding() function requires the usage of following functions:
     About space complexity, a queue is used to keep track of traverse nodes, size of the queue can take up to (2n-1), a dictionary map the character and its huffman code, 
     size of dictionary can take up to n. Hence, space complexity is O(2n-1) which is O(n) or linear space complexity.
 
-    5. encode_data(), take original data and encoded_dictionary as input and return an encoded data. This has time complexity of O(n) and space complexity of O(n).
+    5. encode_data(), take original data and encoded_dictionary as input and return an encoded data. This has time complexity of O(n).
+    Because each character in original data has a huffman code link to each, I would say space complexity of this is O(n^2) or quadratic space complexity.
+
+In conclusion, huffman_encoding() take O(n log n) time complexity and O(n^2) space complexity.
 
 The huffman_decoding(), take encoded_data and binary tree as an input and decoded and return original data. For each character in original data,
 it would traverse the binary tree to find decoded value. And traverse the binary tree take O(log n) time complexity, so the time complexity of this 
