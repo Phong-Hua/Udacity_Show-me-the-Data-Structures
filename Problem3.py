@@ -155,11 +155,13 @@ def build_tree(priority_queue):
     while priority_queue.get_size() > 1:
         left = priority_queue.extract_min()
         right = priority_queue.extract_min()
+
         sum_priority = left[0] + right[0]
         node = Node(None, sum_priority)
         node.set_left(left[1])
         node.set_right(right[1])
         priority_queue.insert_key(sum_priority, node)
+        
     root = priority_queue.extract_min()[1]
     return root
 

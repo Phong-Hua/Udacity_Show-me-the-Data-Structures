@@ -1,0 +1,34 @@
+Given a string as an input, input size (n) is length of that string.
+The huffman_encoding() function requires the usage of following functions:
+    1. extract_char_frequence(), looping through all characters of input string and return a dictionary. Hence time complexity is O(n) and
+    space complexity is O(n)
+    
+    2. create_priority_queue(), take output of extract_char_frequence() above as an input, and return priority_queue using MinHeap data structure.
+    It looping through all element of input and insert that element to MinHeap. The insertion has time complexity of O(log n). 
+    So, time complexity of create_priority_queue() is O(n log n). MinHeap contains all element of input so space complexity is O(n).
+
+    3. build_tree(), take priority_queue as an input and create a tree. While priority_queue is not empty, it involves extract_min() from priority_queue 2 times
+    and insert_key() once. Each of two operations take O(log n) time complexity. Hence, the time complexity of build_tree() is O(n log n).
+    About space complexity:
+        If priority_queue has 1 element the tree has 1 node.
+        If priority_queue has 2 elements the tree has 3 nodes.
+        If priority_queue has 3 elements the tree has 5 nodes.
+        If priority_queue has 4 elements the tree has 7 nodes.
+        If priority_queue has 5 elements the tree has 9 nodes.
+
+    So number of nodes of the tree that is creates from n elements is 2n-1. Hence, space complexity is O(2n-1) which is O(n).
+
+    4. traverse(), take a tree that is created from build_tree as an input and return a dictionary which map the character and its huffman code. The tree has
+    (2n-1) element, and this is breadth first traversal. so Time complexity it takes to traverse is O(2n-1) which is O(n).
+    About space complexity, a queue is used to keep track of traverse nodes, size of the queue can take up to (2n-1), a dictionary map the character and its huffman code, 
+    size of dictionary can take up to n. Hence, space complexity is O(2n-1) which is O(n) or linear space complexity.
+
+    5. encode_data(), take original data and encoded_dictionary as input and return an encoded data. This has time complexity of O(n) and space complexity of O(n).
+
+The huffman_decoding(), take encoded_data and binary tree as an input and decoded and return original data. For each character in original data,
+it would traverse the binary tree to find decoded value. And traverse the binary tree take O(log n) time complexity, so the time complexity of this 
+huffman_decoding() is O(n log n). 
+About space complexity, variables inside that function are:
+    decoded_data: which supposed to be original data and this is O(n) space complexity.
+    node: which is a tree that has (2n-1) nodes.
+So space complexity of this function is O(2n-1) which is linear complexity or O(n).

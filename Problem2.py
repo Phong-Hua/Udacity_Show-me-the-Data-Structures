@@ -16,7 +16,7 @@ def find_files(suffix, path):
     Returns:
        a list of paths
     """
-    if suffix is None or not path:
+    if suffix is None or not path or not os.path.isdir(path):
         return []
 
     result = list()
@@ -80,8 +80,18 @@ def test_case_5():
     result = find_files('.c', "")
     print(result)
 
+def test_case_6():
+    """
+    Testing edge case, path is not a directory, should return an empty list
+    """
+    print("*********Test_case_6***********")
+    path = os.path.join(os.path.dirname(__file__), 'testdir', 't1.c')
+    result = find_files('.c', path)
+    print(result)
+
 test_case_1()
 test_case_2()
 test_case_3()
 test_case_4()
 test_case_5()
+test_case_6()

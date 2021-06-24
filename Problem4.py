@@ -72,7 +72,7 @@ def test_case_1():
 
 def test_case_2():
     """
-    Normal test case. User is not in the group
+    Edge test case. User does not have any parent
     """
     print("************Test_case_2****************")
     parent = Group("parent")
@@ -105,6 +105,28 @@ def test_case_3():
     print(is_user_in_group(sub_child_user, parent))
     # False
 
+def test_case_4():
+    """
+    Edge test case. Group is invalid.
+    
+    """
+    print("************Test_case_4****************")
+    parent = Group("parent")
+    child = Group("child")
+    sub_child = Group("subchild")
+    invalid_group = Group("Invalid")
+
+    sub_child_user = "sub_child_user"
+    invalid_group.add_user(sub_child_user)
+
+    child.add_group(sub_child)
+    parent.add_group(child)
+    
+    # invalid_group does not belong to parent group, but we search for sub_child_user from parent group.
+    print(is_user_in_group(sub_child_user, parent))
+    # False
+
 test_case_1()
 test_case_2()
 test_case_3()
+test_case_4()
